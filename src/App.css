@@ -1,0 +1,615 @@
+/* General Body Styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #f2f4f7;
+  color: #333;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+}
+
+/* Small Screen Styling */
+@media (max-width: 768px) {
+  body {
+    width: 100vw;
+    position: relative;
+    font-size: 14px;
+    padding: 10px;
+    flex-direction: column;
+    background-color: #e0e4e9; /* Slightly lighter for better contrast on small screens */
+    overflow-x: hidden;
+  }
+}
+
+
+/* Header */
+.header {
+  background-color: #5a2d81; /* Updated to a shiny purple */
+  padding: 10px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  height: 60px;
+  margin: 0;
+}
+
+.sidebar-toggle {
+  position: absolute;
+  left: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: white;
+  overflow-x: hidden;
+  background: none;
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+.header-title {
+  margin: 0;
+  font-size: 24px;
+  color: white;
+}
+
+.paw-symbol {
+  padding: 20px;
+  font-size: 33px;
+  color: white;
+}
+
+/* Main Content and Layout */
+.header-section {
+  position: relative;
+  margin-top: 60px; /* Offset for the fixed header */
+  width: 100%;
+  height: 60vh; /* Full viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden; /* Hide overflow to prevent scrolling */
+}
+
+/* Main Content */
+.main-content {
+  margin-left: 0;
+  padding: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: margin-left 0.3s ease, padding 0.3s ease;;
+  overflow-x: hidden;
+}
+
+.main-content.shifted {
+  margin-left: 200px; /* Adjust to accommodate the sidebar */
+  padding-right: 20px; /* Add padding to the right */
+  padding-left: 60px;
+}
+
+.content-wrapper {
+  flex: 1;
+  padding: 20px;
+  overflow-y: auto; /* Enables vertical scrolling for content below the image */
+  width: 100%;
+}
+
+/* Image Container */
+.image-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%; /* Full width */
+  height: 60vh; /* Full viewport height */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  z-index: 1;
+  transition: transform 0.3s ease; /* Smooth transition for resizing */
+}
+
+.header-image {
+  width: 100%;
+  height: 100%; /* Maintain aspect ratio */
+  object-fit: cover; /* Ensure the image covers the container */
+  object-position: center bottom; /* Crop from the top, keep the bottom part */
+}
+
+/* Overlay Text */
+.overlay-text {
+  position: absolute;
+  top: 60px; /* Adjust top position */
+  left: 50%;
+  transform: translateX(-50%); /* Center the text horizontally */
+  color: white;
+  font-size: 1.5rem; /* Default font size */
+  text-align: center;
+  font-weight: bold;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); /* Add shadow for better visibility */
+  z-index: 2; /* Ensure the text is above the image */
+}
+
+/* Adjust overlay text for screens smaller than 768px */
+@media (max-width: 768px) {
+  .overlay-text {
+    padding-top: 13%;
+    top: 40px; /* Move text up slightly for smaller screens */
+    font-size: 1.2rem; /* Reduce font size */
+  }
+}
+
+/* Further adjustments for very small screens (below 480px) */
+@media (max-width: 480px) {
+  .overlay-text {
+    top: 30px; /* Move text further up */
+    font-size: 1rem; /* Further reduce font size */
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* Reduce shadow size */
+  }
+}
+
+
+/* Adopt Now Box */
+.adopt-now-box {
+  cursor: pointer;
+  position: absolute;
+  bottom: 200px; /* Adjust position to be below the overlay text */
+  left: 50%;
+  transform: translateX(-50%); /* Center the box horizontally */
+  background-color: rgba(0, 0, 0, 0.7); /* Transparent black background */
+  color: white;
+  padding: 7px;
+  border-radius: 5px;
+  z-index: 2; /* Ensure it is above the image */
+  transition: border 0.3s ease, background-color 0.3s ease; /* Smooth transition */
+}
+
+.adopt-now-box:hover {
+  border: 2px solid #dbc0f2; /* Teal color for hover effect */
+  background-color: rgba(0, 0, 0, 0.9); /* Slightly less transparent on hover */
+}
+
+/* Hide Adopt Now Box on small screens (below 768px) */
+@media (max-width: 768px) {
+  .adopt-now-box {
+    display: none; /* Hide the box on smaller screens */
+  }
+}
+
+
+/* Adjustments when the sidebar is open */
+.main-content.shifted .image-container {
+  width: calc(100% - 200px); /* Adjust width to accommodate the sidebar */
+  margin-left: 200px; /* Shift the image container when the sidebar is open */
+}
+
+/* Sidebar */
+.sidebar {
+  background-color: #5a2d81; /* Updated to a shiny purple */
+  padding: 20px;
+  position: fixed;
+  width: 200px;
+  top: 80px;
+  bottom: 0;
+  left: 0;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 999;
+  overflow-y: auto;
+}
+
+.sidebar.open {
+  transform: translateX(0);
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.sidebar li a {
+  text-decoration: none;
+  color: #f9f5f0; /* Light color for text in the sidebar */
+  font-size: 1.2rem;
+}
+
+.sidebar li:hover {
+  background-color: #c1a0ca; /* Darker shade for hover effect */
+  color: white;
+}
+
+.sidebar.closed {
+  transform: translateX(-100%); /* Hidden state */
+}
+
+/* Responsive Styles for Mobile */
+@media (max-width: 768px) {
+  .sidebar {
+    transform: translateX(-100%); /* Sidebar hidden by default */
+    transition: transform 0.3s ease; /* Smooth transition */
+    overflow-x: hidden;
+  }
+
+  .sidebar.open {
+    transform: translateX(0); /* Show sidebar when open */
+  }
+
+  .main-content {
+    margin-left: 0; /* Reset margin when sidebar is closed */
+    transition: margin-left 0.3s ease; /* Smooth transition */
+  }
+
+  .main-content.shifted {
+    margin-left: 250px; /* Adjust according to sidebar width */
+  }
+}
+
+/* Ensure the html and body take full height */
+html, body {
+  height: 100%; /* Ensure full height */
+  margin: 0; /* Remove default margin */
+}
+
+/* Main app container */
+.app {
+  display: flex; /* Use flexbox for layout */
+  flex-direction: column; /* Arrange children in a column */
+  min-height: 100vh; /* Minimum height of the app */
+}
+
+/* Main content area */
+.main-content {
+  flex: 1; /* Allow the main content to expand */
+  padding: 20px; /* Add padding for content */
+  /* You can set a minimum height to prevent footer overlap */
+  min-height: calc(100vh - 80px); /* Adjust '60px' to the height of your footer */
+  overflow-x: hidden;
+}
+
+/* Ensure no overflow on mobile */
+@media (max-width: 768px) {
+  .main-content {
+    padding: 0; /* Remove padding to avoid overflow */
+    margin-left: 0; /* Ensure no margin causing scroll */
+    overflow-x: hidden;
+  }
+}
+
+/* Footer styles */
+.footer {
+  background-color: #5a2d81; /* Footer background color */
+  padding: 15px 20px; /* Padding for footer */
+  text-align: center; /* Center the footer text */
+  color: white; /* Footer text color */
+  width: auto; /* Full width */
+  margin: 0; /* Remove margin */
+  position: relative; /* Position relative to the main content */
+  z-index: 1000; /* Stack above other content */
+  box-shadow: 0 -4px 6px rgba(0, 0, 0, 0.1); /* Optional shadow for separation */
+  box-sizing: border-box;
+  font-size: 2vw; /* Responsive font size */
+}
+
+/* Optional: Adjust font size for smaller screens */
+@media (max-width: 600px) {
+  .footer {
+    font-size: 3.5vw; /* Increase size for smaller screens */
+  }
+}
+
+/* Optional: Adjust font size for larger screens */
+@media (min-width: 1200px) {
+  .footer {
+    font-size: 1.5vw; /* Decrease size for larger screens */
+  }
+}
+
+.pet-gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+  padding: 20px;
+  margin: 20px 30px;
+  overflow-x: hidden;
+}
+
+.pet-posts-wrapper {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  margin: 20px auto;
+  width: 89%;
+  margin-bottom: -19px;
+  overflow-x: hidden;
+}
+
+/* Pet Card */
+.pet-card {
+  background: #fff; /* White background */
+  border: 1px solid #ddd; /* Light border */
+  border-radius: 8px; /* Rounded corners */
+  padding: 10px; /* Inner padding */
+  width: 300px; /* Fixed width */
+  max-width: 100%; /* Ensure it doesn't overflow */
+  text-align: center; /* Center the text */
+  transition: transform 0.3s; /* Scale effect on hover */
+  margin-bottom: 20px; /* Space between cards */
+  height: 400px; /* Fixed height */
+  box-sizing: border-box; /* Include padding and border in width */
+}
+
+@media (max-width: 768px) {
+  .pet-card {
+    width: 270px; /* Keep width same on tablets and smaller screens */
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .pet-card {
+    width: 270px; /* Keep width same on mobile screens */
+    max-width: 100%;
+  }
+}
+
+/* Ensure gallery fits smaller screens */
+@media (max-width: 768px) {
+  .pet-gallery {
+    padding: 10px; /* Adjust padding for mobile */
+    margin: 10px 0; /* Avoid horizontal scroll from margin */
+    overflow-x: hidden;
+  }
+}
+
+@media (max-width: 480px) {
+  .pet-gallery {
+    padding: 5px; /* Minimize padding for very small screens */
+    margin: 0;
+    overflow-x: hidden;
+  }
+}
+
+.pet-card img {
+  width: 100%; /* Full width for images */
+  height: 200px; /* Fixed height for images */
+  object-fit: cover; /* Ensure images cover the container */
+  border-radius: 8px; /* Rounded corners for images */
+}
+
+.pet-card h3 {
+    font-size: 1.2rem; /* Reduce the heading size */
+  }
+
+  .pet-card p {
+    font-size: 0.9rem; /* Reduce the paragraph text size */
+  }
+
+/* Mobile and very small screens */
+  .pet-card h3 {
+    font-size: 1rem; /* Further reduce the heading size */
+  }
+
+  .pet-card p {
+    font-size: 0.8rem; /* Further reduce the paragraph text size */
+  }
+
+ .pet-card:hover {
+  transform: scale(1.05); /* Scale effect on hover */
+}
+
+/* App.css or your relevant CSS file */
+
+.pet-gallery.with-gap {
+  margin-top: 150px; /* Gap when "Adopt Now" is clicked */
+overflow-x: hidden;
+}
+
+/*crete-post*/
+
+.form-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center; /* Center vertically */
+  height: calc(97vh - 60px); /* Full height minus header height */
+  margin-top: 20px; /* Optional for spacing */
+}
+
+.pet-form {
+  background-color: white;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-width: 400px; /* Limit width for better appearance */
+  width: auto; /* Full width */
+  margin: 0; /* Remove top/bottom margin */
+}
+
+.pet-form input,
+.pet-form select,
+.pet-form textarea {
+  width: 100%; /* Make all inputs take full width of the form */
+  margin-bottom: 15px; /* Add space between inputs */
+  padding: 10px; /* Add some padding for better appearance */
+  border: 1px solid #ddd; /* Optional: add a border */
+  border-radius: 4px; /* Optional: rounded corners */
+  box-sizing: border-box; /* Include padding and border in the element's total width */
+}
+
+.pet-form button {
+  background-color: #5a2d81; /* Match the theme color */
+  color: white;
+  border: none;
+  padding: 10px;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.pet-form button:hover {
+  background-color: #4c2270; /* Darker shade on hover */
+}
+
+.about-container {
+  padding: 20px; /* Inner space */
+  background-color: transparent; /* No background color */
+  color: #333; /* Text color */
+  max-width: 800px; /* Max width for the content */
+  margin: 70px auto 20px; /* Top margin of 40px, bottom margin of 20px */
+  border: none; /* Remove border */
+  font-size:1rem;
+}
+
+h2 {
+  color: #4c2270; /* Your secondary color */
+}
+
+ul {
+  list-style-type: square; /* Remove bullets */
+  padding-left: 0; /* No padding */
+}
+
+p {
+  line-height: 1.9; /* Better readability */
+}
+
+.contact-container {
+  padding: 20px; /* Inner space */
+  background-color: transparent; /* No background color */
+  color: #333; /* Text color */
+  max-width: 800px; /* Max width for the content */
+  margin:80px auto 20px; /* Top margin of 40px, bottom margin of 20px */
+  border: none; /* Remove border*/ 
+}
+
+h2 {
+  color: #53247c;; /* Your secondary color */
+}
+
+ul {
+  list-style-type: square; /* Remove bullets */
+  padding-left: 0; /* No padding */
+}
+
+p {
+  line-height: 1.6; /* Better readability */
+}
+
+.form-group {
+  margin-bottom: 15px; /* Space between form fields */
+}
+
+label {
+  display: block; /* Labels on their own line */
+  margin-bottom: 5px; /* Space between label and input */
+}
+
+input, textarea {
+  width: 70%; /* Full width */
+  padding: 10px; /* Inner space */
+  border: 1px solid #ccc; /* Border */
+  border-radius: 10px; /* Rounded corners */
+}
+
+button {
+  background-color: #53247c; /* Button color */
+  color: #fff; /* Text color */
+  padding: 10px 15px; /* Inner space */
+  border: none; /* No border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor on hover */
+}
+
+/* LoadingIndicator.css */
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-left-color: #5a2d81;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+
+/*------------------------- Responsive Adjustments------------------------ */
+@media (max-width: 768px) {
+  .header-section {
+    height: auto; /* Allow header section to adjust height */
+    padding-bottom: 65%;
+  }
+
+  .image-container {
+    height: 50vh; /* Adjust height for smaller screens */
+  }
+
+  .main-content.shifted 
+  {
+    margin-left: 0; /* No margin on mobile */
+    padding: 0; /* No padding */
+  }
+
+  .pet-gallery {
+    padding: 10px; /* Adjust padding for mobile */
+  }
+
+  .pet-posts-wrapper {
+    width: 100%; /* Full width for pet posts */
+  }
+}
+
+@media (max-width: 480px) {
+  .image-container {
+    width: 100%; /* Full width */
+    max-height: 40vh; /* Adjusted height for small screens */
+  }
+
+  .header-title {
+    font-size: 20px; /* Smaller title size on mobile */
+  }
+
+  .paw-symbol {
+    font-size: 24px; /* Smaller paw symbol on mobile */
+  }
+
+  .adopt-now-box {
+    bottom: 100px; /* Adjust position for better visibility */
+    padding: 5px; /* Reduce padding */
+  }
+}
